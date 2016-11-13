@@ -4,7 +4,6 @@
 #
 PROJECT := dsa
 
-
 ##############################
 # Set directories
 ##############################
@@ -53,5 +52,4 @@ tree_algo: $(TREE_OBJS)
 	$(CC) $(CFLAGS) -o $(BUILD_DIR)/tree_algo $(TREE_OBJS)
 
 clean:
-	rm -f $(foreach SRC_DIR, $(SRC_DIRS), $($(SRC_DIR))/*~) \
-		$(foreach SRC_DIR, $(SRC_DIRS), $($(SRC_DIR))/*.o) -R build 
+	rm -f $(foreach SRC_DIR, $(SRC_DIRS), $($(SRC_DIR))/*.o) -R build

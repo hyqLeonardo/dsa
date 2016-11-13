@@ -3,22 +3,19 @@
 #include "queue.h"
 
 /* array based queue */
-void init_queue(a_queue *queue)
-{
+void init_queue(a_queue *queue) {
 	queue->front = 0;
 	queue->rear = 0;
 }
 
-int queue_empty(a_queue *queue)
-{
+int queue_empty(a_queue *queue) {
 	if (queue->front == queue->rear)
 		return TRUE;
 	else
 		return FALSE;
 }
 
-int enqueue(a_queue *queue, void *a)
-{
+int enqueue(a_queue *queue, void *a) {
 	if ((queue->rear+1)%MAXSIZE == queue->front)	/* queue is full */
 		return FALSE;
 	queue->data[queue->rear] = a;
@@ -26,8 +23,7 @@ int enqueue(a_queue *queue, void *a)
 	return TRUE;
 }
 
-int dequeue(a_queue *queue, void **x)
-{
+int dequeue(a_queue *queue, void **x) {
 	if (queue_empty(queue))
 		return FALSE;
 	*x = queue->data[queue->front];
@@ -36,8 +32,7 @@ int dequeue(a_queue *queue, void **x)
 }
 
 /* link based queue, with header node which does not has data */
-void init_lqueue(l_queue *queue)
-{
+void init_lqueue(l_queue *queue) {
 	/* initialize header */
 	l_node *header = malloc(sizeof(l_node));
 	header->next = NULL;
@@ -47,16 +42,14 @@ void init_lqueue(l_queue *queue)
 	queue->rear = header;
 }
 
-int lqueue_empty(l_queue *queue)
-{
+int lqueue_empty(l_queue *queue) {
 	if (queue->front == queue->rear)
 		return TRUE;
 	else
 		return FALSE;
 }
 
-void enlqueue(l_queue *queue, void *a)
-{
+void enlqueue(l_queue *queue, void *a) {
 	/* create new node */
 	l_node *node = malloc(sizeof(l_node));
 	node->data = a;
@@ -67,8 +60,7 @@ void enlqueue(l_queue *queue, void *a)
 	queue->rear = node;
 }
 
-int delqueue(l_queue *queue, void **x)
-{
+int delqueue(l_queue *queue, void **x) {
 	if (lqueue_empty(queue))
 		return FALSE;
 

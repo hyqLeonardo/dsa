@@ -2,34 +2,29 @@
 
 #include "stack.h"
 
-void init_stack(a_stack *stack)
-{
+void init_stack(a_stack *stack) {
 	stack->top = -1;
 }
 
-int stack_empty(a_stack *stack)
-{
+int stack_empty(a_stack *stack) {
 	return stack->top == -1 ? TRUE : FALSE;
 }
 
-int push(a_stack *stack, void *a)
-{
+int push(a_stack *stack, void *a) {
 	if (stack->top == MAXSIZE-1)	/* stack is full */
 		return FALSE;
 	stack->data[++stack->top] = a;
 	return TRUE; 
 }
 
-int pop(a_stack *stack, void **x)
-{
+int pop(a_stack *stack, void **x) {
 	if (stack->top == -1)
 		return FALSE;
 	*x = stack->data[stack->top--];
 	return TRUE;		
 }
 
-int get_top(a_stack *stack, void **x)
-{
+int get_top(a_stack *stack, void **x) {
 	if (stack->top == -1)
 		return FALSE;
 	*x = stack->data[stack->top];
