@@ -4,7 +4,7 @@
 #include <stdio.h>
 
 #define TRUE 1
-#define FALSE 0
+#define FALSE -1
 
 /* element type of data in node */
 typedef int bst_elem_t;

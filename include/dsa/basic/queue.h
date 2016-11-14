@@ -8,7 +8,7 @@
 
 #define MAXSIZE 50
 #define TRUE 1
-#define FALSE 0
+#define FALSE -1
 
 /*
  * struct definition of array based queue

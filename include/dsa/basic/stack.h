@@ -1,6 +1,6 @@
 #pragma once
 /* 
- * stack implementation, 'generic'
+ * stack header, 'generic'
  */
 
 #include <stdio.h>
@@ -8,7 +8,7 @@
 
 #define MAXSIZE 50
 #define TRUE 1
-#define FALSE 0
+#define FALSE -1
 
 /*
  * struct definition of array based stack

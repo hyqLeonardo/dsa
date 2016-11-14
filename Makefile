@@ -13,10 +13,10 @@ INC_DIRS := $(shell find * -type d -exec bash -c "find {} -maxdepth 1 \
 	\( -name '*.h' -o -name '*.proto' \) | grep -q ." \; -print)
 # INC_DIRS := include/dsa/tree
 # Directories containing code.
-COMMON_SRC := src/dsa
+BASIC_SRC := src/dsa/basic
 TREE_SRC := src/dsa/tree
 GRAPH_SRC := src/dsa/grapha
-SRC_DIRS := COMMON_SRC
+SRC_DIRS := BASIC_SRC
 SRC_DIRS += TREE_SRC
 SRC_DIRS += GRPH_SRC
 # Direcotry to put build files
