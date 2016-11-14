@@ -8,8 +8,8 @@ Currently includes tree and graph.
 
 There are several interesting sites inspired this project :
 - [Amazing visulisation of data structures and algorithms](https://visualgo.net/)
-- [MIT course-Introduction to Algorithms: 6.006](https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-006-introduction-to-algorithms-fall-2011/index.htm)
-- [My github repository of MIT course-Introduction to Algorithms](https://github.com/hyqLeonardo/algorithm.git)
+- [MIT OpenCourseWare - Introduction to Algorithms: 6.006](https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-006-introduction-to-algorithms-fall-2011/index.htm)
+- [My github repository of Introduction to Algorithms: 6.006](https://github.com/hyqLeonardo/algorithm.git)
 
 File structure illustration:
 
@@ -17,20 +17,16 @@ File structure illustration:
 --dsa
   --include
     --dsa
+      --basic
       --graph
       --test
       --tree
-      link_list.h
-      queue.h
-      stack.h
   --src
     --dsa
+      --basic
       --graph
       --test
       --tree
-      link_list.c
-      queue.c
-      stack.c
   .gitignore
   Makefile
   README.md
