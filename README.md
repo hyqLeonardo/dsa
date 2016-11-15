@@ -1,5 +1,7 @@
 # dsa
 
+[![Build Status](https://travis-ci.org/hyqLeonardo/dsa.svg?branch=master)](https://travis-ci.org/hyqLeonardo/dsa)
+
 dsa is my C implementation of basic data structures and algorithms.
 
 Based on books I used to prepare for the Graduation Entrance Exam, and Internet, of course.
