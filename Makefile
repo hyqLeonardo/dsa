@@ -43,7 +43,7 @@ TEST_GRAPH_ADJ_OBJS := $(TEST_SRC)/test_graph_adj.o $(BASIC_SRC)/queue.o \
 .PHONY: all test clean
 
 CC := gcc
-CFLAGS := -Wall -m32 -g $(foreach INC_DIR, $(INC_DIRS), -I$(INC_DIR))
+CFLAGS := -Wall $(foreach INC_DIR, $(INC_DIRS), -I$(INC_DIR))
 
 all: dir tree_algo graph_algo
 
