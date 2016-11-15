@@ -7,11 +7,11 @@
 #include <stdlib.h>
 
 /* structure of single linked list with head node */
-typedef struct l_node {
+typedef struct LNode {
 	void *data;
-	struct l_node *next;
-} l_node;
+	struct LNode *next;
+} LNode;
 
-void init_l(l_node *head);
-void print_l(l_node *head);
-void insert_l(l_node *head, void *a);
+void init_l(LNode *head);
+void print_l(LNode *head);
+void insert_l(LNode *head, void *a);

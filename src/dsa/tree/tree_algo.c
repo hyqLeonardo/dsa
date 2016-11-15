@@ -46,15 +46,15 @@ void post_order(BiTree T)
 void pre_order_2(BiTree T)
 {
 	/* can initialize a stack first, then create a pointer to that */
-	// a_stack s;
+	// ArrayStack s;
 	// init_stack(&s);
-	// a_stack *stack = &s;
+	// ArrayStack *stack = &s;
 	/* same as above, initialize, then create pointer */
-	// a_stack s = { .top = -1 };
-	// a_stack *stack = &s;
+	// ArrayStack s = { .top = -1 };
+	// ArrayStack *stack = &s;
 	/* Or, use malloc to allocate a memory size of struct 
 	 * where malloc's return value is the pointer to stack struct */
-	a_stack *stack = malloc(sizeof(a_stack));
+	ArrayStack *stack = malloc(sizeof(ArrayStack));
 	init_stack(stack);
 	BiTree p = T;
 
@@ -73,18 +73,17 @@ void pre_order_2(BiTree T)
 
 void in_order_2(BiTree T)
 {
-	a_stack *stack = malloc(sizeof(a_stack));
+	ArrayStack *stack = malloc(sizeof(ArrayStack));
 	init_stack(stack);
 	BiTree p = T;	/* traverse pointer */
 
 	while (p || !stack_empty(stack)) {
-		if (p) {
+		if (p) {	/* if node is not NULL */
 			push(stack, (void *)p);
 			p = p->lchild;
-		}
-		else {
+		} else {	/* pop and visit */	
 			pop(stack, (void *)&p);
-			visit_bst((BiTree)p);
+			visit_bst(p);
 			p = p->rchild;
 		}
 	}
@@ -92,7 +91,7 @@ void in_order_2(BiTree T)
 
 void post_order_2(BiTree T)
 {
-	a_stack *stack = malloc(sizeof(a_stack));
+	ArrayStack *stack = malloc(sizeof(ArrayStack));
 	init_stack(stack);
 	BiTree p = T;
 	BiTree r = NULL;	/* pointer to check */
@@ -119,7 +118,7 @@ void post_order_2(BiTree T)
 /* can give the right output, but will destroy original tree structure */
 // void post_order_destory(BiTree T)
 // {
-// 	a_stack *stack = malloc(sizeof(a_stack));
+// 	ArrayStack *stack = malloc(sizeof(ArrayStack));
 // 	init_stack(stack);
 // 	BiTree p = T;
 
@@ -160,7 +159,7 @@ void in_order_thread(ThreadTree T)
  */
 void a_layer(BiTree T)
 {
-	a_queue *queue = malloc(sizeof(a_queue));
+	ArrayQueue *queue = malloc(sizeof(ArrayQueue));
 	init_queue(queue);
 	enqueue(queue, (void *)T);
 	BiTNode *t;
@@ -180,7 +179,7 @@ void a_layer(BiTree T)
  */
 void l_layer(BiTree T)
 {
-	l_queue *queue = malloc(sizeof(l_queue));
+	LinkQueue *queue = malloc(sizeof(LinkQueue));
 	init_lqueue(queue);
 	enlqueue(queue, (void *)T);
 	BiTNode *t = malloc(sizeof(BiTNode));
@@ -197,6 +196,15 @@ void l_layer(BiTree T)
 
 int main(int argc, char *argv[])
 {
+	/* display info */
+	printf("###############################################\n");
+	size_t pointer_size = sizeof(void *);
+	if (pointer_size == 4)
+		printf("32-bit version, pointer size is 4 bytes\n");
+	if (pointer_size == 8)
+		printf("64-bit version, pointer size is 8 bytes\n");
+	printf("###############################################\n\n");
+
 	/* initialize toy trees */
 	BiTree root = malloc(sizeof(BiTNode));
 	btree_toy(root);
@@ -214,7 +222,6 @@ int main(int argc, char *argv[])
 	// printf("stack based post order traverse of complete tree\n");
 	// post_order_2(root_complete);
 	// printf("\n");
-	printf("size of (void *) is %d\n", (int)sizeof(void *));
 	printf("in order traverse of tree using stack\n");
 	in_order_2(root);
 	printf("\n");

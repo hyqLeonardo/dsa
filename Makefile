@@ -15,20 +15,22 @@ INC_DIRS := $(shell find * -type d -exec bash -c "find {} -maxdepth 1 \
 # Directories containing code.
 BASIC_SRC := src/dsa/basic
 TREE_SRC := src/dsa/tree
-GRAPH_SRC := src/dsa/grapha
+GRAPH_SRC := src/dsa/graph
 SRC_DIRS := BASIC_SRC
 SRC_DIRS += TREE_SRC
 SRC_DIRS += GRPH_SRC
 # Direcotry to put build files
 BUILD_DIR := build
 
-
 ##############################
 # Define build targets
 ##############################
 
-TREE_OBJS := $(TREE_SRC)/tree_algo.o $(COMMON_SRC)/stack.o $(COMMON_SRC)/queue.o \
+TREE_OBJS := $(TREE_SRC)/tree_algo.o $(BASIC_SRC)/stack.o $(BASIC_SRC)/queue.o \
 	$(TREE_SRC)/bst.o $(TREE_SRC)/tbt.o
+
+GRAPH_OBJS := $(GRAPH_SRC)/graph_algo.o $(BASIC_SRC)/stack.o $(BASIC_SRC)/queue.o \
+	$(GRAPH_SRC)/adj_graph.o 
 
 ##############################
 # Build
@@ -36,9 +38,9 @@ TREE_OBJS := $(TREE_SRC)/tree_algo.o $(COMMON_SRC)/stack.o $(COMMON_SRC)/queue.o
 .PHONY: all
 
 CC := gcc
-CFLAGS := -Wall -g $(foreach INC_DIR, $(INC_DIRS), -I$(INC_DIR))
+CFLAGS := -Wall -m32 -g $(foreach INC_DIR, $(INC_DIRS), -I$(INC_DIR))
 
-all: dir tree_algo
+all: dir tree_algo graph_algo
 
 dir:
 # Create build directory if doesn't exist
@@ -50,6 +52,9 @@ endif
 
 tree_algo: $(TREE_OBJS)
 	$(CC) $(CFLAGS) -o $(BUILD_DIR)/tree_algo $(TREE_OBJS)
+
+graph_algo: $(GRAPH_OBJS)
+	$(CC) $(CFLAGS) -o $(BUILD_DIR)/graph_algo $(GRAPH_OBJS)
 
 clean:
 	rm -f $(foreach SRC_DIR, $(SRC_DIRS), $($(SRC_DIR))/*.o) -R build
