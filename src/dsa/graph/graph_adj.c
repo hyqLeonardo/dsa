@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-#include "adj_graph.h"
+#include "graph_adj.h"
 
 void init_graph(DirGraph *graph) {
 	graph->vertex_num = 0;

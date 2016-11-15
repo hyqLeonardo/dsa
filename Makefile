@@ -16,9 +16,11 @@ INC_DIRS := $(shell find * -type d -exec bash -c "find {} -maxdepth 1 \
 BASIC_SRC := src/dsa/basic
 TREE_SRC := src/dsa/tree
 GRAPH_SRC := src/dsa/graph
+TEST_SRC := src/dsa/test
 SRC_DIRS := BASIC_SRC
 SRC_DIRS += TREE_SRC
-SRC_DIRS += GRPH_SRC
+SRC_DIRS += GRAPH_SRC
+SRC_DIRS += TEST_SRC
 # Direcotry to put build files
 BUILD_DIR := build
 
@@ -30,12 +32,15 @@ TREE_OBJS := $(TREE_SRC)/tree_algo.o $(BASIC_SRC)/stack.o $(BASIC_SRC)/queue.o \
 	$(TREE_SRC)/bst.o $(TREE_SRC)/tbt.o
 
 GRAPH_OBJS := $(GRAPH_SRC)/graph_algo.o $(BASIC_SRC)/stack.o $(BASIC_SRC)/queue.o \
-	$(GRAPH_SRC)/adj_graph.o 
+	$(GRAPH_SRC)/graph_adj.o 
+
+TEST_GRAPH_ADJ_OBJS := $(TEST_SRC)/test_graph_adj.o $(BASIC_SRC)/queue.o \
+	$(GRAPH_SRC)/graph_adj.o
 
 ##############################
 # Build
 ##############################
-.PHONY: all
+.PHONY: all test clean
 
 CC := gcc
 CFLAGS := -Wall -m32 -g $(foreach INC_DIR, $(INC_DIRS), -I$(INC_DIR))
@@ -55,6 +60,9 @@ tree_algo: $(TREE_OBJS)
 
 graph_algo: $(GRAPH_OBJS)
 	$(CC) $(CFLAGS) -o $(BUILD_DIR)/graph_algo $(GRAPH_OBJS)
+
+test: dir $(TEST_GRAPH_ADJ_OBJS)
+	$(CC) $(CFLAGS) -o $(BUILD_DIR)/test $(TEST_GRAPH_ADJ_OBJS)
 
 clean:
 	rm -f $(foreach SRC_DIR, $(SRC_DIRS), $($(SRC_DIR))/*.o) -R build
