@@ -5,8 +5,8 @@ compiler: gcc
 script: make && make test
 
 before_install:   
-  - chmod +x travis_install.sh
   - export SCRIPTS=./scripts/travis
-  
+
 install: 
+  - chmod +x $SCRIPTS/travis_install.sh
   - sudo -E $SCRIPTS/travis_install.sh
