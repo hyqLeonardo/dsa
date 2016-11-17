@@ -7,21 +7,21 @@ void init_graph(DirGraph *graph) {
 	graph->edge_num = 0;
 }
 
-void visit_vertex(VertexNode *v) {
+void visit_vertex(VertexNode *v, int print) {
 
-	printf("%d ", v->data);
+	if (print) printf("%d ", v->data);
 }
 
-void visit_edge(VertexNode *v, EdgeNode *e) {
+void visit_edge(VertexNode *v, EdgeNode *e, int print) {
 
-	printf("(%d -> %d) ", v->data, e->vertex->data);
+	if (print) printf("(%d -> %d) ", v->data, e->vertex->data);
 }
 
 void print_graph_vertex(DirGraph *graph) {
 
 	int i;
 	for (i = 0; i < graph->vertex_num; i++)		/* traverse vertex */
-		visit_vertex(graph->vertices[i]);
+		visit_vertex(graph->vertices[i], 1);
 }
 
 void print_graph_edge(DirGraph *graph) {
@@ -32,7 +32,7 @@ void print_graph_edge(DirGraph *graph) {
 		vertex = graph->vertices[i];	
 		EdgeNode *edge = vertex->first;
 		while (edge) {							/* traverse edge */
-			visit_edge(vertex, edge);
+			visit_edge(vertex, edge, 1);
 			edge = edge->next;	
 		} 	
 	}
@@ -116,6 +116,7 @@ int add_vertex(DirGraph *graph, int v) {
 	/* create new node */
 	VertexNode *node = (VertexNode *)malloc(sizeof(VertexNode));
 	node->data = v;
+	node->first = NULL;
 	if (vertex_index(graph, v) != -1)	/* v already exist */
 		return -1;
 	// Add vertex AND update vertex count, 
@@ -138,6 +139,7 @@ int add_edge(DirGraph *graph, int v1, int v2) {
 	/* create edge v1 -> v2 */
 	EdgeNode *edge_v1 = (EdgeNode *)malloc(sizeof(EdgeNode));
 	edge_v1->vertex = graph->vertices[v2_index];
+	edge_v1->next = NULL;
 	/* set vertex1 point to v1 */
 	VertexNode *vertex1 = graph->vertices[v1_index];
 

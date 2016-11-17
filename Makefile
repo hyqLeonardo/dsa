@@ -34,18 +34,22 @@ TREE_OBJS := $(TREE_SRC)/tree_algo.o $(BASIC_SRC)/stack.o $(BASIC_SRC)/queue.o \
 GRAPH_OBJS := $(GRAPH_SRC)/graph_algo.o $(BASIC_SRC)/stack.o $(BASIC_SRC)/queue.o \
 	$(GRAPH_SRC)/graph_adj.o 
 
+# Tests targets
 TEST_GRAPH_ADJ_OBJS := $(TEST_SRC)/test_graph_adj.o $(BASIC_SRC)/queue.o \
 	$(GRAPH_SRC)/graph_adj.o
+
+TEST_GRAPH_ALGO_OBJS := $(TEST_SRC)/test_graph_algo.o $(BASIC_SRC)/queue.o \
+	$(GRAPH_SRC)/graph_adj.o $(GRAPH_SRC)/graph_algo.o
 
 ##############################
 # Build
 ##############################
-.PHONY: all test clean
+.PHONY: all
 
 CC := gcc
 CFLAGS := -Wall $(foreach INC_DIR, $(INC_DIRS), -I$(INC_DIR))
 
-all: dir tree_algo graph_algo
+all: dir tree_algo 
 
 dir:
 # Create build directory if doesn't exist
@@ -58,11 +62,16 @@ endif
 tree_algo: $(TREE_OBJS)
 	$(CC) $(CFLAGS) -o $(BUILD_DIR)/tree_algo $(TREE_OBJS)
 
-graph_algo: $(GRAPH_OBJS)
-	$(CC) $(CFLAGS) -o $(BUILD_DIR)/graph_algo $(GRAPH_OBJS)
+# graph_algo: $(GRAPH_OBJS)
+# 	$(CC) $(CFLAGS) -o $(BUILD_DIR)/graph_algo $(GRAPH_OBJS)
 
-test: dir $(TEST_GRAPH_ADJ_OBJS)
-	$(CC) $(CFLAGS) -o $(BUILD_DIR)/test $(TEST_GRAPH_ADJ_OBJS)
+test: test_graph_adj test_graph_algo
+
+test_graph_adj: dir $(TEST_GRAPH_ADJ_OBJS)
+	$(CC) $(CFLAGS) -o $(BUILD_DIR)/test_graph_adj $(TEST_GRAPH_ADJ_OBJS) -lcunit
+
+test_graph_algo: dir $(TEST_GRAPH_ALGO_OBJS)
+	$(CC) $(CFLAGS) -o $(BUILD_DIR)/test_graph_algo $(TEST_GRAPH_ALGO_OBJS) -lcunit
 
 clean:
 	rm -f $(foreach SRC_DIR, $(SRC_DIRS), $($(SRC_DIR))/*.o) -R build

@@ -42,8 +42,8 @@ typedef struct DirGraph {
 } DirGraph;
 
 void init_graph(DirGraph *graph);
-void visit_vertex(VertexNode *v);
-void visit_edge(VertexNode *v, EdgeNode *e);
+void visit_vertex(VertexNode *v, int print);
+void visit_edge(VertexNode *v, EdgeNode *e, int print);
 void print_graph_vertex(DirGraph *graph);
 void print_graph_edge(DirGraph *graph);
 int vertex_index(DirGraph *graph, int v);
