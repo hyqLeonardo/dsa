@@ -1,4 +1,4 @@
-#!/bin/bash
+#/usr/bin/env sh
 # This script must be run with sudo.
 
 # for CUnit test

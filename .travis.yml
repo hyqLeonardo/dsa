@@ -4,5 +4,4 @@ compiler: gcc
 
 script: make && make test
 
-install: 
-  - sudo -E $SCRIPTS/travis_install.sh
+install: ./travis_install.sh
